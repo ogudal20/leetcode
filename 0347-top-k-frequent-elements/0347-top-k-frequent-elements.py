@@ -6,13 +6,12 @@ class Solution:
         for n in nums:
             count[n] = 1 + count.get(n, 0)
             
-        for i, c in count.items():
-            freq[c].append(i)
-            
+        for c, i in count.items():
+            freq[i].append(c)
+        
         result = []
         for i in range(len(nums), 0, -1):
             for j in freq[i]:
                 result.append(j)
-                if len(result) == k:
-                    return result
-                
+            if len(result) == k:
+                return result
