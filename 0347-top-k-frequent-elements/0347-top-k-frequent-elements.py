@@ -1,24 +1,24 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        #1. define a hashmap 
-        #2. loop through nums array
-            #a. in each iteration add the num in hashmap if the don't exist with value 0
-            #b. increment the value of key in the hashmap
+        count = {}
+        freq = [[] for i in range(len(nums) + 1)]
         
-        #3. sort the hashmap by the values from highest to lowest.
-        #4. loop through the 0 to k elements
-            # append the values in the hashmap to new list
-        #5. return the list
-        index = 0
-        most_freq = {}
-        result = []
-        for i in nums:
-            if i not in most_freq:
-                most_freq[i] = 0
-            most_freq[i] += 1
+        # Count the number of occurences for each num
+        for n in nums:
+            count[n] = 1 + count.get(n, 0)
             
-        most_freq = list(sorted(most_freq.items(), key=lambda item: item[1], reverse=True))
+        # Going through each number that we counted.
+        for n, c in count.items():
+            freq[c].append(n)
+            
+        # get top k elements.
+        # start in descending order to get top k elements.
+        # start from the end of array to the start and decrement loop by 1
+        res = []
+        for i in range(len(freq) - 1, 0, -1):
+            for n in freq[i]:
+                res.append(n)
+                if len(res) == k:
+                    return res
+                
         
-        for j in range((k)):
-            result.append(most_freq[j][index])
-        return result
