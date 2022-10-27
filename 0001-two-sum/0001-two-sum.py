@@ -7,4 +7,4 @@ class Solution:
             if diff in prevMatch:
                 return [prevMatch[diff], i]
             prevMatch[n] = i
-        return 
+        return
